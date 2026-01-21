@@ -1,6 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
 import { useState, useEffect } from "react";
-const ai = new GoogleGenAI({ apiKey: "AIzaSyAW3z2Hi91MgECwPvYGgMWmLXHORVq6kF4" });
+const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_AI_API_KEY! });
 
 export default function useLinkedInParser(data: any) {
     const [response, setResponse] = useState<any>(null);
