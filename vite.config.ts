@@ -12,4 +12,6 @@ export default defineConfig({
     }),
     tailwindcss(),
   ],
+  base: '/linkedin-resume-parser/'
 })
+  
