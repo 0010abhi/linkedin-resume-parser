@@ -1,4 +1,4 @@
-import AppBadge from "../app/Badge";
+import AppBadge from "../app-components/Badge";
 
 export default function ResumeSkills({ skills }: { skills: string[] }) {
     return (

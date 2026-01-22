@@ -1,4 +1,4 @@
-import TextInput from "../app/TextInput";
+import TextInput from "../app-components/TextInput";
 
 export default function ResumePersonalInfo({ personalInfo }: { personalInfo: any }) {
     return (
