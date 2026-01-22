@@ -1,55 +1,79 @@
+import { DevicePhoneMobileIcon, EnvelopeIcon, MapPinIcon, LinkIcon } from '@heroicons/react/24/solid'
 
 export default function ResumePreview({ data }: { data: any }) {
     return <>
-    <div className="profile-section">
-                    <h1>{data.name}</h1>
-                    <p className="title">{data.title}</p>
-                    {/* <img src="via.placeholder.com" alt="Your Photo" className="profile-pic" /> */}
-                </div>
-                <div className="contact-section">
-                    <h2><i className="fas fa-envelope"></i> Contact</h2>
-                    <p>Email: {data.email}</p>
-                    <p>Phone: {data.phone}</p>
-                    <p>Location: {data.location}</p>
-                    <p>LinkedIn: {data.linkedin}</p>
-                </div>
-                <div className="skills-section">
-                    <h2><i className="fas fa-wrench"></i> Skills</h2>
-                    <div className="flex flex-row flex-wrap">
-                        {data.skills.map((skill: string, index: number) => (
-                            <div key={index}>{skill}</div>
-                        ))}
+        <div className="border-b-2 border-sky-300 p-4">
+            <div className='pb-1'>
+                <div className="text-3xl text-sky-600 text-center">{data.name.toUpperCase()}</div>
+                <p className="title">{data.title}</p>
+            </div>
+            <div>
+                {/* <img src="via.placeholder.com" alt="Your Photo" className="profile-pic" /> */}
+            </div>
+            <div className='flex text-slate-500 justify-center'>
+                <p><EnvelopeIcon className="inline-block w-5 h-5 mr-1" />{data.email}</p>
+                <p><DevicePhoneMobileIcon className="inline-block w-5 h-5 mr-1" />{data.phone}</p>
+            </div>
+            {data.location && <div className='flex text-slate-500 justify-center'>
+                <p><MapPinIcon className="inline-block w-5 h-5 mr-1" />{data.location}</p>
+            </div>}
+            {/* TODO: Make it like a social links to genralise suppose in case of developer github but in case of content instagram */}
+            <div className='flex text-slate-500 justify-center'>
+                {data.linkedin && <p><LinkIcon className="inline-block w-5 h-5 mr-1" /> {data.linkedin}</p>}
+            </div>
+        </div>
+        {data?.summary && <section className="summary-section">
+            <div className='text-2xl text-stone-950 font-semibold my-2'>Professional Summary</div>
+            <p>{data?.summary}</p>
+        </section>}
+
+        <section className="border-b-1 border-slate-300 p-2">
+            <div className='text-2xl text-stone-950 font-semibold my-2 font-sans'>Work Experience</div>
+            {data.experience.map((job: any, index: number) => (
+                <div key={index} className="flex flex-col mb-2">
+                    <div className='font-serif'>
+                        <div className="text-xl text-stone-800">{job.title}</div>
+                        <p className="text-sm text-gray-450 mb-1">{job.company} | {job.duration}</p>
                     </div>
-
+                    {job.responsibilities && <div className='text-base font-sans'>
+                        <ul className='list-disc ml-4'>
+                            {job.responsibilities.map((resp: string, respIndex: number) => (
+                                <li className='mt-1/2' key={respIndex}>{resp}</li>
+                            ))}
+                        </ul>
+                    </div>}
                 </div>
-                <section className="summary-section">
-                    <h2><i className="fas fa-user-circle"></i> Professional Summary</h2>
-                    <p>{data?.summary}</p>
-                </section>
+            ))}
+        </section>
 
-                <section className="experience-section">
-                    <h2><i className="fas fa-briefcase"></i> Work Experience</h2>
-                    {data.experience.map((job: any, index: number) => (
-                        <div key={index} className="job-item">
-                            <h3>{job.title}</h3>
-                            <p className="company-date">{job.company} | {job.duration}</p>
-                            <ul>
-                                {job.responsibilities.map((resp: string, respIndex: number) => (
-                                    <li key={respIndex}>{resp}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </section>
+        <section className="border-b-1 border-slate-300 p-2">
+            <div className='text-2xl text-stone-950 font-semibold my-2 font-sans'>Education</div>
+            {data.education.map((edu: any, index: number) => (
+                <div key={index} className="flex flex-col mb-2">
+                    <div className='font-serif'>
+                        <div className="text-xl text-stone-800">{edu.degree}</div>
+                        <p className="text-sm text-gray-450 mb-1">{edu.school} | {edu.year}</p>
+                    </div>
+                    {edu.description && <div className='text-base font-sans'>
+                        <ul className='list-disc ml-4'>
+                            {edu.description.map((resp: string, respIndex: number) => (
+                                <li className='mt-1/2' key={respIndex}>{resp}</li>
+                            ))}
+                        </ul>
+                    </div>}
+                </div>
 
-                <section className="education-section">
-                    <h2><i className="fas fa-graduation-cap"></i> Education</h2>
-                    {data.education.map((edu: any, index: number) => (
-                        <div key={index} className="education-item">
-                            <h3>{edu.degree}</h3>
-                            <p className="school-year">{edu.school} | {edu.year}</p>
-                        </div>
-                    ))}
-                </section>
+
+            ))}
+        </section>
+
+        <div className="skills-section">
+            <div className='text-2xl text-stone-950 font-semibold my-2 font-sans'>Skills</div>
+            <div className="flex flex-row flex-wrap text-base font-sans">
+                {data.skills.map((skill: string, index: number) => (
+                    <div key={index}>{skill},&nbsp;</div>
+                ))}
+            </div>
+        </div>
     </>;
 }   
