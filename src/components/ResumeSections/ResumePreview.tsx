@@ -1,11 +1,12 @@
 import { DevicePhoneMobileIcon, EnvelopeIcon, MapPinIcon, LinkIcon } from '@heroicons/react/24/solid'
 
 export default function ResumePreview({ data }: { data: any }) {
+    console.log("Data in ResumePreview:", data);
     return <>
         <div className="border-b-2 border-sky-300 p-4">
             <div className='pb-1'>
                 <div className="text-3xl text-sky-600 text-center">{data.name.toUpperCase()}</div>
-                <p className="title">{data.title}</p>
+                <div>{data.title}</div>
             </div>
             <div>
                 {/* <img src="via.placeholder.com" alt="Your Photo" className="profile-pic" /> */}
@@ -22,9 +23,9 @@ export default function ResumePreview({ data }: { data: any }) {
                 {data.linkedin && <p><LinkIcon className="inline-block w-5 h-5 mr-1" /> {data.linkedin}</p>}
             </div>
         </div>
-        {data?.summary && <section className="summary-section">
+        {data?.professionalSummary && <section className="summary-section">
             <div className='text-2xl text-stone-950 font-semibold my-2'>Professional Summary</div>
-            <p>{data?.summary}</p>
+            <p>{data?.professionalSummary}</p>
         </section>}
 
         <section className="border-b-1 border-slate-300 p-2">
