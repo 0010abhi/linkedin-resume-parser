@@ -1,15 +1,28 @@
 import { useState } from "react";
 import TemplateOne from "./TemplateOne";
+import TemplateTwo from "./TemplateTwo";
 
 export default function ChooseTemplate({ data }: { data: any }) {
     const [selectedTemplate, setSelectedTemplate] = useState<string>("template1");
     console.log("Data in ChooseTemplate:", data);
+
+    function renderTemplate() {
+        if (data) {
+            if (selectedTemplate === "template1") {
+                return <TemplateOne data={data} />;
+            } else if (selectedTemplate === "template2") {
+                return <TemplateTwo data={data} />;
+            }
+        }
+
+        return null;
+    }
     return (
-        <div>
-            <div className="text-3xl font-bold text-blue-600">
+        <div className="flex flex-col mx-6">
+            <div className="text-xl font-semibold text-indigo-500 font-serif">
                 Choose Template Component
             </div>
-            <div className="my-4">
+            <div className="mt-1">
                 <label className="mr-4">
                     <input
                         type="radio"
@@ -33,11 +46,10 @@ export default function ChooseTemplate({ data }: { data: any }) {
                     Template 2
                 </label>
             </div>
-            {
-                data && selectedTemplate === "template1" ? (
-                    <TemplateOne data={data} />
-                ) : null
-            }
+            <div className="flex scroll-auto">
+                {renderTemplate()}
+            </div>
+
         </div>
     );
 }
